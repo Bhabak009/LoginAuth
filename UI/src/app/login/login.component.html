@@ -1,0 +1,33 @@
+<div class="col-lg-12 hstack gap-2 justify-content-center">
+    
+    <div class="card m-4 shadow">
+        <div class="card-header hstack justify-content-center">
+            <h2>Login Form</h2>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="myForm">
+                <div class="row m-4">
+                    <div class="col-lg-4">
+                        <label class="form-label">User Name<span class="astrisk">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" formControlName="userName" class="form-control">
+                        <div *ngIf="submitted && myForm.controls['userName'].errors?.['required']" class="text-danger">User Name Required</div>
+                    </div>
+                </div>
+                <div class="row m-4">
+                    <div class="col-lg-4">
+                        <label class="form-label">Password<span class="astrisk">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" formControlName="password" class="form-control">
+                        <div *ngIf="submitted && myForm.controls['password'].errors?.['required']" class="text-danger">Password Required</div>
+                    </div>
+                </div>
+                <div class="hstack gap-2 justify-content-center m-4">
+                    <button class="btn" (click)="Login()">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
