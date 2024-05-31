@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StateService } from '../services/state.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { PincodeService } from '../services/pincode.service';
 
 @Component({
   selector: 'app-state',
@@ -15,19 +16,24 @@ export class StateComponent {
   myForm: FormGroup;
   state:State;
   
-   constructor(private authService: AuthService,private fb:FormBuilder){
+   constructor(private pincodeService: PincodeService,private fb:FormBuilder){
     this.state = new State();
-   this.myForm=this.fb.group({
-    userName:[''],
-    password:['']
-   })
+  //  this.myForm=this.fb.group({
+  //   userName:[''],
+  //   password:['']
+  //  })
    }
-  //  ngOnInit(){
-  //   this.myForm=this.fb.group({
-  //     userName:[''],
-  //     password:['']
-  //   })
-  //  }
+   ngOnInit(){
+    this.myForm=this.fb.group({
+      pincode:['']
+    })
+   }
+   check(){
+    this.pincodeService.checkTerritory(this.myForm.value.pincode).subscribe(res=>{
+      console.log(res);
+      alert(res[0].PostOffice[0].State);
+    })
+   }
 
 
   //  Save(){
@@ -48,14 +54,14 @@ export class StateComponent {
 
   //  }
 
-Save(){
-if(this.myForm.valid){
-  this.state.userName=this.myForm.value.userName;
-  this.state.password=this.myForm.value.password;
-}
-this.authService.login(this.state).subscribe(res=>{
-  console.log(res);
-})
+// Save(){
+// if(this.myForm.valid){
+//   this.state.userName=this.myForm.value.userName;
+//   this.state.password=this.myForm.value.password;
+// }
+// this.authService.login(this.state).subscribe(res=>{
+//   console.log(res);
+// })
 
-}
+// }
 }

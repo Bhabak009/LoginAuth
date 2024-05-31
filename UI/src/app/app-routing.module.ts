@@ -6,11 +6,13 @@ import { DistComponent } from './dist/dist.component';
 import {  AuthGuard } from './auth.guard';
 
 
+
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   // {path:'state',component:StateComponent},
  {path:'state',component:StateComponent,canActivate:[AuthGuard]},
-  {path:'',redirectTo:'login',pathMatch:'full'}
+  {path:'',redirectTo:'login',pathMatch:'full'},
+ 
 ];
 
 @NgModule({
